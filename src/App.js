@@ -26,5 +26,37 @@ class App {
     }
     return carNameList;
   }
+
+  async runGame(carNameList) {
+    const gameRounds = await Console.readLineAsync(MESSAGE.GAME_ROUND_PROMPT);
+    const carList = carNameList.map((name) => ({
+      carName: name,
+      distance: "",
+      ranking: 0,
+    }));
+    for (let round = 0; round < gameRounds; round++) {
+      this.moveCar(carList);
+      this.resultView(carList);
+    }
+    this.checkRank(carList);
+    this.winnerView(carList);
+  }
+
+  moveCar(carList) {
+    carList.forEach((car) => {
+      let number = Random.pickNumberInRange(0, 9);
+      if (number >= CONDITIONS.DISTANCE_INCREASE_CRITERIA) {
+        car.distance += "-";
+      }
+    });
+  }
+  
+  resultView(carList) {
+    carList.forEach((car) => {
+      Console.print(`${car.carName} : ${car.distance}`);
+    });
+    Console.print("");
+  }
+
 }
 export default App;
