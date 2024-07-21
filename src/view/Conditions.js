@@ -1,0 +1,6 @@
+const CONDITIONS = {
+  CAR_NAME_LENGTH: 5,
+  DISTANCE_INCREASE_CRITERIA: 4,
+};
+
+export default CONDITIONS;
