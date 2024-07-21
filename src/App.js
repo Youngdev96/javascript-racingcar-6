@@ -50,7 +50,7 @@ class App {
       }
     });
   }
-  
+
   resultView(carList) {
     carList.forEach((car) => {
       Console.print(`${car.carName} : ${car.distance}`);
@@ -58,5 +58,23 @@ class App {
     Console.print("");
   }
 
+  checkRank(carList) {
+    const sortedCars = [...carList].sort(
+      (a, b) => b.distance.length - a.distance.length
+    );
+
+    // 랭킹 부여
+    let currentRank = 1;
+    let prevDistance = sortedCars[0].distance.length;
+
+    sortedCars.forEach((car, index) => {
+      if (car.distance.length < prevDistance) {
+        currentRank = index + 1;
+      }
+      const originalCar = carList.find((c) => c.carName === car.carName);
+      originalCar.ranking = currentRank;
+      prevDistance = car.distance.length;
+    });
+  }
 }
 export default App;
