@@ -76,5 +76,15 @@ class App {
       prevDistance = car.distance.length;
     });
   }
+
+  winnerView(carList) {
+    const winners = carList
+      .filter((car) => car.ranking === 1)
+      .map((car) => car.carName);
+
+    winners.length === 1
+      ? Console.print(MESSAGE.WINNER_MESSAGE + `${winners[0]}`)
+      : Console.print(MESSAGE.WINNER_MESSAGE + `${winners.join(", ")}`);
+  }
 }
 export default App;
