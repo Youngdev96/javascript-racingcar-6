@@ -4,13 +4,14 @@ import CONDITIONS from "./view/Conditions.js";
 
 class App {
   async play() {
-    await this.getCarsName();
+    const carsName = await this.getCarsName();
+    const carNameList = this.validateCarName(carsName);
+    this.runGame(carNameList);
   }
 
   async getCarsName() {
     const carsName = await Console.readLineAsync(MESSAGE.CAR_NAME_PROMPT);
-    const carNameList = this.validateCarName(carsName);
-    this.runGame(carNameList);
+    return carsName;
   }
 
   validateCarName(carsName) {
